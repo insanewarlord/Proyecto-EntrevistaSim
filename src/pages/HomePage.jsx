@@ -11,7 +11,7 @@ export default function HomePage() {
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-rose-500 to-orange-500 opacity-50"></div>
       <div className="relative z-10 flex flex-col items-center text-center text-white p-4 bg-opacity-40 rounded-xl max-w-lg mx-4 sm:mx-8 lg:mx-16">
         <div className="bg-white rounded-full p-3 animate-jump-in mb-4">
-          <img src={Logo} alt="Logo" className="w-20 h-20 md:w-32 md:h-32" />
+          <img src={Logo} alt="Logo" className="w-40 h-40 md:w-32 md:h-32" />
         </div>
         <h1 className="text-5xl md:text-7xl font-bold mb-4 animate-jump">
           InterviewSim

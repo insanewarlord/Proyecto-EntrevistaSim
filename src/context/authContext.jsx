@@ -5,6 +5,8 @@ import {
   verifyTokenRequest,
   LoginRequest,
   registerRequest,
+  logoutRequest,
+  deleteUserRequest,
 } from "../api/auth.js";
 import { useContext } from "react";
 
@@ -84,15 +86,52 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signout = () => {
-    Cookies.remove("token");
-    setUser(null);
-    setIsAuthenticated(false);
+  const signout = async () => {
+    try {
+      await logoutRequest();
+      Cookies.remove("token");
+      setUser(null);
+      setIsAuthenticated(false);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        console.error("Error 401: No autorizado. No se pudo cerrar sesión.");
+      } else {
+        console.error(
+          "Error durante el cierre de sesión:",
+          error.response ? error.response.data : error.message
+        );
+      }
+    }
+  };
+
+  const deleteUser = async (user) => {
+    try {
+      await deleteUserRequest(user);
+      setUser(null);
+      setIsAuthenticated(false);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        console.error("Error 401: No autorizado. No se pudo cerrar sesión.");
+      } else {
+        console.error(
+          "Error durante la eliminación del usuario:",
+          error.response ? error.response.data : error.message
+        );
+      }
+    }
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, loading, signin, signup, signout }}
+      value={{
+        user,
+        isAuthenticated,
+        loading,
+        signin,
+        signup,
+        signout,
+        deleteUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

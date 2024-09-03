@@ -5,9 +5,13 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    'node_modules/flowbite-react/lib/esm/**/*.js'
   ],
   theme: {
     extend: {
+        colors: {
+            'custom-bg': '#1e1e1e',
+          },
       keyframes: {
           'wiggle': {
               '0%, 100%': {

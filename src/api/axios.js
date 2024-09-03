@@ -5,5 +5,9 @@ const instance = axios.create({
     withCredentials: true,
 });
 
+const instanceInterview = axios.create({
+    baseURL: "http://localhost:3000/interwiew",
+    withCredentials: true,
+});
 
-export default instance;
+export { instance, instanceInterview };

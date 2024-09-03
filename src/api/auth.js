@@ -1,10 +1,20 @@
-import axios from './axios.js';
+
+import {instance} from './axios.js';
 
 // Registro
-export const registerRequest = (userData) => axios.post(`/register`, userData);
+export const registerRequest = (userData) => instance.post(`/register`, userData);
 
 // Login
-export const LoginRequest = (userData) => axios.post(`/login`, userData);
+export const LoginRequest = (userData) => instance.post(`/login`, userData);
 
 // Verificar token
-export const verifyTokenRequest = () => axios.get(`/verify`);
+export const verifyTokenRequest = () => instance.get(`/verify`);
+
+//loagout
+export const logoutRequest = () => instance.post(`/logout`);
+
+//Eliminar usuario
+export const deleteUserRequest = (userData) => instance.delete(`/deleteUser`,userData);
+
+
+

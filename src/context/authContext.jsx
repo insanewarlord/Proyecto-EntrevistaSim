@@ -9,6 +9,7 @@ import {
   deleteUserRequest,
 } from "../api/auth.js";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -25,22 +26,23 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkLogin = async () => {
       const cookies = Cookies.get();
-      console.log("Cookies:", cookies);
       if (!cookies.token) {
         setIsAuthenticated(false);
         setLoading(false);
+        navigate("/login"); // Redirige al login si no hay token
         return;
       }
       try {
         const res = await verifyTokenRequest(cookies.token);
-        console.log(res);
         if (!res.data) {
           setIsAuthenticated(false);
           setUser(null);
+          navigate("/login"); // Redirige al login si el token es inválido
         } else {
           setIsAuthenticated(true);
           setUser(res.data);
@@ -49,10 +51,8 @@ export const AuthProvider = ({ children }) => {
       } catch (error) {
         setIsAuthenticated(false);
         setLoading(false);
-        console.error(
-          "Error al verificar el token:",
-          error.response ? error.response.data : error.message
-        );
+        console.error("Error al verificar el token:", error);
+        navigate("/login"); // Redirige al login si hay un error
       }
     };
     checkLogin();

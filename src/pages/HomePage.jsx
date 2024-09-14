@@ -4,7 +4,7 @@ import Logo from "../assets/Logo.png";
 
 export default function HomePage() {
   return (
-    <div className="relative h-screen flex flex-col justify-center items-center overflow-hidden">
+    <div className="relative h-screen flex w-full flex-col justify-center items-center overflow-hidden">
       <div className="absolute inset-0">
         <img src={Fondo} alt="Fondo" className="w-full h-full object-cover" />
       </div>

@@ -1,13 +1,14 @@
 import { useAuth } from "../../context/authContext";
 import Logo from "../../assets/logo.png";
 import Info from "./Info";
-import Opciones from "./Opciones";
+import Acciones from "./acciones";
 import Buttons from "./buttons";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   console.log(user);
   const Back = () => {
     window.history.back();
@@ -44,6 +45,14 @@ function Profile() {
     setFechas(user.date);
     setRole(user.role);
   }, [user]);
+
+  const handleRedirect = () => {
+    if (user?.role === "student") {
+      navigate("/student");
+    } else if (user?.role === "teacher") {
+      navigate("/teacher");
+    }
+  };
 
   return (
     <div className="h-screen w-full p-5">
@@ -95,8 +104,8 @@ function Profile() {
               </div>
             </div>
           </div>
-          <Link
-            to={`/student`}
+          <button
+            onClick={handleRedirect}
             className="rounded-full p-4 bg-gradient-to-l from-lime-300 via-green-300 to-emerald-300 shadow-md hover:scale-110 transform duration-200 ease-in-out"
           >
             <svg
@@ -113,10 +122,10 @@ function Profile() {
                 d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
               />
             </svg>
-          </Link>
+          </button>
         </div>
-        <div className="flex flex-col lg:flex-row items-center justify-center w-full h-full space-y-5 lg:space-y-0 lg:space-x-5 mt-5 mb-5">
-          <div className="w-full lg:w-1/2 flex justify-center items-center border-4 rounded-lg h-full">
+        <div className="flex flex-col lg:flex-row items-center justify-center w-full h-full lg:space-y-0 lg:space-x-5 mt-5 mb-5 overflow-hidden">
+          <div className="w-full lg:w-1/2 flex justify-center items-center h-full ">
             <Info
               name={username}
               email={email}
@@ -125,11 +134,11 @@ function Profile() {
               role={role}
             />
           </div>
-          <div className="w-full lg:w-1/2 flex justify-center items-center border-4 rounded-lg h-full">
-            <Opciones />
+          <div className="w-full lg:w-1/2 flex flex-col h-full ">
+            <Acciones />
           </div>
         </div>
-        <div className="bottom-0 w-full flex justify-center items-center mt-5 border-4 h-1/4 rounded-lg">
+        <div className="bottom-0 w-full flex justify-center items-center  h-1/4 overflow-hidden">
           <Buttons />
         </div>
       </div>

@@ -3,7 +3,7 @@ import Protys from "prop-types";
 function Info({ name, email, indetifiquer, date, role }) {
   console.log("info usuario", name, email, indetifiquer, date, role);
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center bg-gradient-to-r from-red-300 via-yellow-300 to-orange-300 overflow-hidden">
+    <div className="h-full w-full flex flex-col items-center justify-center bg-gradient-to-r from-red-300 via-yellow-300 to-orange-300 overflow-hidden rounded-lg">
       <div className="flex flex-col w-full max-w-xl p-6 ">
         <div className="flex flex-col space-y-4">
           <div className="flex bg-white p-2 rounded-lg w-full justify-between items-center">

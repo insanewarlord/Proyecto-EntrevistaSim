@@ -28,7 +28,7 @@ function Buttons() {
   };
   return (
     <>
-      <div className="h-full w-full flex items-center bg-gradient-to-r from-orange-300 via-lime-300 to-emerald-300 overflow-hidden">
+      <div className="h-full w-full flex items-center bg-gradient-to-r from-red-300 via-yellow-300 to-emerald-300 overflow-hidden rounded-lg">
         <div className="flex w-full justify-between items-center">
           <div className="flex  px-8">
             <button

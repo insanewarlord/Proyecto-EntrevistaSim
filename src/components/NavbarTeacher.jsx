@@ -38,7 +38,7 @@ function NavbarTeacher() {
   }, [user]);
   return (
     <>
-      <nav className="flex justify-center items-center w-full border-4 px-6 mx-auto rounded-lg bg-gradient-to-l from-purple-300 via-orange-300 to-rose-400">
+      <nav className="flex justify-center items-center w-full  px-6 mx-auto rounded-lg bg-gradient-to-l from-purple-300 via-orange-300 to-rose-400">
         <div className="flex justify-between items-center w-full mx-auto p-2">
           <p className="text-xl font-bold text-gray-900 mr-5 hidden lg:block md:text-base">
             ¡Bienvenido de nuevo a tu inicio Profesor 👋❤️!

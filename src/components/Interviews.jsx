@@ -36,9 +36,9 @@ function PanelInterviews() {
           >
             <defs>
               <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#00bfff" /> {/* Azul Claro */}
-                <stop offset="50%" stopColor="#ff69b4" /> {/* Rosa */}
-                <stop offset="100%" stopColor="#32cd32" /> {/* Verde Lima */}
+                <stop offset="0%" stopColor="#00bfff" />
+                <stop offset="50%" stopColor="#ff69b4" />
+                <stop offset="100%" stopColor="#32cd32" />
               </linearGradient>
             </defs>
             <circle
@@ -63,7 +63,7 @@ function PanelInterviews() {
   }
 
   return (
-    <div className="flex h-full w-full bg-gradient-to-r from-lime-300 via-red-100 to-purple-200 rounded-lg border-4 overflow-hidden">
+    <div className="flex h-full w-full bg-gradient-to-r from-lime-300 via-red-100 to-purple-200 rounded-lg  overflow-hidden">
       <div
         className="flex flex-col w-full h-full p-5 space-y-5 overflow-y-auto"
         key={interviews.title}
@@ -77,6 +77,9 @@ function PanelInterviews() {
             <p>{interview.description}</p>
             <div className="space-y-2">
               <p className="text-gray-500">Empresa: {interview.empresa}</p>
+              <p className="text-gray-500">
+                Tipo de entrevista: {interview.tipoEntrevista}
+              </p>
             </div>
             <div className="flex w-full justify-between items-center">
               <Link

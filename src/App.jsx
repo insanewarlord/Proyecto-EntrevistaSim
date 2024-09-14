@@ -4,7 +4,6 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Spinner from "./components/spinner";
 import { AuthProvider } from "./context/authContext";
-
 import AreaStudent from "./pages/AreaStudent";
 import AreaTeacher from "./pages/AreaTeacher";
 import AreaInterview from "./pages/AreaInterview";
@@ -28,8 +27,8 @@ function App() {
       <Spinner />
     </div>
   ) : (
-    <AuthProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -50,8 +49,8 @@ function App() {
           bodyClassName={"text-sm p-2 m-2 "}
           theme={"light"}
         />
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

@@ -17,4 +17,9 @@ export const logoutRequest = () => instance.post(`/logout`);
 export const deleteUserRequest = (userData) => instance.delete(`/deleteUser`,userData);
 
 
+//traer calificaciones
+export const getGradesRequest = () => instance.get(`/getGrades`);
 
+
+//traer calificaciones de profesor
+export const getGradesTeacherRequest = () => instance.get(`/getGradesTeacher`);

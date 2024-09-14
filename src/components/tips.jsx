@@ -53,7 +53,7 @@ function Tips() {
   };
 
   return (
-    <div className="flex items-center justify-center border-4 h-full w-full overflow-hidden rounded-lg">
+    <div className="flex items-center justify-center  h-full w-full overflow-hidden rounded-lg">
       <div className="flex justify-center items-center h-full w-full">
         <div className="flex w-full h-full">
           <div

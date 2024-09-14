@@ -1,9 +1,17 @@
-import { Link } from "react-router-dom";
 import Logo from "../assets/logo.png";
+import { useState } from "react";
+import Protypes from "prop-types";
 
-function MenuTeacher() {
+function MenuTeacher({ onMenuItemChange }) {
+  const [selectedMenuItem, setSelectedMenuItem] = useState("create");
+
+  const handleMenuItemClick = (menuItem) => {
+    onMenuItemChange(menuItem);
+    setSelectedMenuItem(menuItem);
+  };
+
   return (
-    <div className="h-full border-4 rounded-lg flex flex-col items-center justify-center bg-gradient-to-r from-purple-300  to-rose-400 p-8 shadow-xl">
+    <div className="h-full  rounded-lg flex flex-col items-center justify-center bg-gradient-to-r from-purple-300  to-rose-400 p-8 shadow-xl">
       <div className="p-4 flex items-center justify-center cursor-pointer mb-8">
         <img
           src={Logo}
@@ -15,9 +23,13 @@ function MenuTeacher() {
         </h1>
       </div>
       <div className="flex flex-col items-center justify-center w-full space-y-8">
-        <Link
-          to="/crear-entrevista"
-          className="px-6 py-4 flex items-center justify-center font-bold text-lg rounded-lg bg-white text-gray-900 shadow-lg hover:bg-gray-100 hover:shadow-xl transition-all duration-300"
+        <button
+          onClick={() => handleMenuItemClick("create")}
+          className={`px-6 py-4 flex items-center justify-center font-bold text-lg rounded-lg bg-white text-gray-900 shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 ${
+            selectedMenuItem === "create"
+              ? "bg-gradient-to-t from-blue-600 to-blue-500 text-white border-2 border-white"
+              : ""
+          }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -34,10 +46,14 @@ function MenuTeacher() {
             />
           </svg>
           Crear Entrevista
-        </Link>
-        <Link
-          to="/ver-entrevistas"
-          className="px-6 py-4 flex items-center justify-center font-bold text-lg rounded-lg bg-white text-gray-900 shadow-lg hover:bg-gray-100 hover:shadow-xl transition-all duration-300"
+        </button>
+        <button
+          onClick={() => handleMenuItemClick("view")}
+          className={`px-6 py-4 flex items-center justify-center font-bold text-lg rounded-lg bg-white text-gray-900 shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 ${
+            selectedMenuItem === "view"
+              ? "bg-gradient-to-t from-blue-600 to-blue-500 text-white border-2 border-white"
+              : ""
+          }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -59,10 +75,10 @@ function MenuTeacher() {
             />
           </svg>
           Ver Entrevistas
-        </Link>
-        <Link
+        </button>
+        <button
           to="/ver-estadisticas"
-          className="px-6 py-4 flex items-center justify-center font-bold text-lg rounded-lg bg-white text-gray-900 shadow-lg hover:bg-gray-100 hover:shadow-xl transition-all duration-300"
+          className="px-6 py-4 flex items-center justify-center font-bold text-lg rounded-lg bg-white text-gray-900 shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -79,10 +95,14 @@ function MenuTeacher() {
             />
           </svg>
           Ver Estadísticas
-        </Link>
+        </button>
       </div>
     </div>
   );
 }
 
 export default MenuTeacher;
+
+MenuTeacher.propTypes = {
+  onMenuItemChange: Protypes.func.isRequired,
+};

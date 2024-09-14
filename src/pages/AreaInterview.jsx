@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { getInterviewByIdRequest } from "../api/interview";
 import { Link, useParams } from "react-router-dom";
 import Logo from "../assets/logo.png";
-import BottomCompilar from "../components/BottomCompilar";
-import ProblemaEntrevista from "../components/ProblemaEntrevista";
-import Spinner from "../components/Spinner"; // Asegúrate de importar correctamente el spinner
+import ProblemaOpcionMultiple from "../components/OpcionMultipleEntrevista.jsx";
+import ProgramacionEntrevista from "../components/ProgramacionEntrevista.jsx";
+import Spinner from "../components/spinner.jsx";
 
 function AreaInterview() {
   const { id } = useParams();
   const [interview, setInterview] = useState({});
-  const [IAresult, setIAresult] = useState("");
-  const [loading, setLoading] = useState(true); // Estado para controlar el spinner
+  const [IAresult, setIAresult] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchInterview = async () => {
@@ -24,7 +24,7 @@ function AreaInterview() {
           error.response ? error.response.data : error.message
         );
       } finally {
-        setLoading(false); // Ocultar el spinner después de cargar los datos
+        setLoading(false);
       }
     };
 
@@ -36,16 +36,16 @@ function AreaInterview() {
   };
 
   if (loading) {
-    return <Spinner />; // Mostrar el spinner mientras se cargan los datos
+    return <Spinner />;
   }
 
   return (
     <div className="h-screen w-full p-5">
       <div className="flex flex-col items-start h-full">
-        <div className="w-full flex justify-between items-center rounded-lg space-x-6 mx-auto">
+        <div className="w-full flex flex-row justify-between items-center rounded-lg space-x-4 lg:space-x-6 mx-auto">
           <button
             onClick={Back}
-            className="rounded-full p-4 bg-gradient-to-l from-purple-300 via-fuchsia-300 to-blue-300 shadow-md hover:scale-110 transform duration-200 ease-in-out"
+            className="rounded-full p-2 lg:p-3 bg-gradient-to-l from-purple-300 via-fuchsia-300 to-blue-300  hover:scale-110 transform duration-200 ease-in-out"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ function AreaInterview() {
               viewBox="0 0 24 24"
               strokeWidth={2}
               stroke="currentColor"
-              className="size-5"
+              className="h-5 w-5 lg:h-6 lg:w-6"
             >
               <path
                 strokeLinecap="round"
@@ -62,20 +62,20 @@ function AreaInterview() {
               />
             </svg>
           </button>
-          <div className="flex text-center bg-gradient-to-r from-purple-300 via-fuchsia-300 to-red-300  rounded-lg w-full justify-between shadow-md px-10 mx-auto items-center">
+          <div className="flex flex-row text-center bg-gradient-to-r from-purple-300 via-fuchsia-300 to-red-300 rounded-lg w-full justify-between  px-5 lg:px-8 mx-auto items-center space-x-4 lg:space-x-5 ">
             <div className="p-1 flex items-center justify-center cursor-pointer">
               <img
                 src={Logo}
                 alt="Logo"
-                className="h-14 w-14 bg-white rounded-full p-1"
+                className="h-10 w-10 lg:h-14 lg:w-14 bg-white rounded-full p-1"
               />
-              <h1 className="text-2xl font-bold text-gray-900 ml-1 hidden lg:block lg:text-2xl">
+              <h1 className="text-xl lg:text-2xl font-bold text-gray-900 ml-1 hidden lg:block">
                 InterviewSim
               </h1>
             </div>
             <div className="flex items-center justify-center">
-              <div className="flex h-10 items-center rounded-3xl animate-jump-in bg-white text-gray-900 p-3">
-                <span className="sm:text-xl md:text-sm font-bold hidden md:block mr-1 text-gray-900">
+              <div className="flex h-6 lg:h-10 items-center rounded-3xl animate-jump-in bg-white text-gray-900 p-2 lg:p-3">
+                <span className="text-sm lg:text-xl font-bold hidden md:block mr-1 text-gray-900">
                   {interview.title}
                 </span>
               </div>
@@ -84,7 +84,7 @@ function AreaInterview() {
           <Link
             to={`/student`}
             onClick={Back}
-            className="rounded-full p-4 bg-gradient-to-r from-red-300 via-rose-300 to-orange-300 shadow-md hover:scale-110 transform duration-200 ease-in-out"
+            className="rounded-full p-2 lg:p-3 bg-gradient-to-r from-red-300 via-rose-300 to-orange-300  hover:scale-110 transform duration-200 ease-in-out"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@ function AreaInterview() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-5"
+              className="h-5 w-5 lg:h-6 lg:w-6"
             >
               <path
                 strokeLinecap="round"
@@ -102,16 +102,24 @@ function AreaInterview() {
             </svg>
           </Link>
         </div>
-        <div className="w-full flex flex-row space-x-5 h-full overflow-hidden mt-5">
-          <div className="w-1/2 flex flex-col space-y-5 h-full">
-            <ProblemaEntrevista
-              IAresult={IAresult}
-              nombre={interview.title}
-              dificultad={interview.Dificultad}
-            />
-          </div>
-          <div className="w-1/2 flex flex-col space-y-5 h-full">
-            <BottomCompilar />
+        <div className="w-full flex flex-col lg:flex-row space-y-5 lg:space-y-0 lg:space-x-5 h-full overflow-hidden mt-5">
+          <div className="w-full flex flex-col space-y-5 h-full">
+            {interview.tipoEntrevista === "programacion" && (
+              <ProgramacionEntrevista
+                nombreEntrevista={interview.title}
+                IAresult={IAresult}
+                dificultad={interview.Dificultad}
+                tipoEntrevista={interview.tipoEntrevista}
+              />
+            )}
+            {interview.tipoEntrevista === "opcionMultiple" && (
+              <ProblemaOpcionMultiple
+                nombreEntrevista={interview.title}
+                IAresult={IAresult}
+                dificultad={interview.Dificultad}
+                tipoEntrevista={interview.tipoEntrevista}
+              />
+            )}
           </div>
         </div>
       </div>

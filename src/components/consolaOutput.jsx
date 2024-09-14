@@ -44,9 +44,9 @@ const ConsolaOutput = ({ outputDetails }) => {
   };
 
   return (
-    <div className="w-full h-1/3 rounded-md text-white font-normal text-sm overflow-y-auto bg-custom-bg flex mt-5">
-      <p className="p-3">
-        <span className="ml-2">Resultado de la compilacion:</span> {getOutput()}
+    <div className="w-full h-full rounded-md text-white font-normal text-sm overflow-y-auto bg-custom-bg flex flex-col">
+      <p className="p-3 whitespace-pre-wrap">
+        <span className="ml-2">Resultado de la compilación:</span> {getOutput()}
       </p>
     </div>
   );

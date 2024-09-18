@@ -26,7 +26,7 @@ const RecomendacionesIA = ({ recomendaciones }) => {
         </svg>
 
         <p className="text-lg font-semibold text-gray-800">
-          No hay recomendaciones disponibles.
+          No hay recomendaciones disponible todavía
         </p>
       </div>
     );

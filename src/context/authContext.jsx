@@ -34,7 +34,6 @@ export const AuthProvider = ({ children }) => {
       if (!cookies.token) {
         setIsAuthenticated(false);
         setLoading(false);
-        navigate("/login"); // Redirige al login si no hay token
         return;
       }
       try {
@@ -56,7 +55,7 @@ export const AuthProvider = ({ children }) => {
       }
     };
     checkLogin();
-  }, []);
+  }, [navigate]);
 
   const signin = async (user) => {
     try {

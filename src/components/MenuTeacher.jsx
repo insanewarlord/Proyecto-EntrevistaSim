@@ -1,4 +1,4 @@
-import Logo from "../assets/logo.png";
+import Logo from "../assets/Logo.png";
 import { useState } from "react";
 import Protypes from "prop-types";
 

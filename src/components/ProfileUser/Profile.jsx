@@ -1,5 +1,5 @@
 import { useAuth } from "../../context/authContext";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/Logo.png";
 import Info from "./Info";
 import Acciones from "./acciones";
 import Buttons from "./buttons";
@@ -25,7 +25,7 @@ function Profile() {
     const loadImage = async () => {
       try {
         const firstLetter = user?.userName?.charAt(0).toUpperCase();
-        const image = await import(`../../assets/letras/${firstLetter}.png`);
+        const image = await import(`../../assets/Letras/${firstLetter}.png`);
         setProfileImage(image.default);
       } catch (error) {
         console.error("Error al cargar la imagen:", error);

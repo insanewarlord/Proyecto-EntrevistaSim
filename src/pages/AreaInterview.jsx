@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getInterviewByIdRequest } from "../api/interview";
 import { Link, useParams } from "react-router-dom";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/Logo.png";
 import ProblemaOpcionMultiple from "../components/OpcionMultipleEntrevista.jsx";
 import ProgramacionEntrevista from "../components/ProgramacionEntrevista.jsx";
 import Spinner from "../components/spinner.jsx";

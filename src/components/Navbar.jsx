@@ -1,5 +1,5 @@
 import { useAuth } from "../context/authContext";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/Logo.png";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -24,7 +24,7 @@ function Navbar() {
     const loadImage = async () => {
       try {
         const firstLetter = user?.userName?.charAt(0).toUpperCase();
-        const image = await import(`../assets/letras/${firstLetter}.png`);
+        const image = await import(`../assets/Letras/${firstLetter}.png`);
         setProfileImage(image.default);
       } catch (error) {
         console.error("Error al cargar la imagen:", error);

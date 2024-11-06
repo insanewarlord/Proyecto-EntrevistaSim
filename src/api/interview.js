@@ -9,3 +9,4 @@ export const deleteInterviewRequest = async (id) => instanceInterview.delete(`/d
 export const calificarInterviewRequest = async (data) => instanceInterview.post(`/calificar`, data);
 export const obtenerRecomendacionesRequest = async (data) => instanceInterview.post(`/recomendaciones`, data);
 export const mostrarInfoRequest = async () => instanceInterview.get(`/info`);
+export const CalificacionRecomendacionProgramacion = async (data)=> instanceInterview.post("/Programacion", data);

@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: import.meta.env.VITE_SERVER_CONNECTION ? `${import.meta.env.VITE_SERVER_CONNECTION}/api` : "http://localhost:8000/api",
+    baseURL:`${import.meta.env.VITE_SERVER_CONNECTION}/api`,
     withCredentials: true,
 });
 
 const instanceInterview = axios.create({
-    baseURL: import.meta.env.VITE_SERVER_CONNECTION ? `${import.meta.env.VITE_SERVER_CONNECTION}/interwiew` : "http://localhost:8000/interwiew",
+    baseURL: `${import.meta.env.VITE_SERVER_CONNECTION}/interwiew`,
     withCredentials: true,
 });
 

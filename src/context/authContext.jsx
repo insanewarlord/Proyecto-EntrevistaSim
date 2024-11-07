@@ -61,6 +61,11 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await LoginRequest(user);
       console.log("Response from LoginRequest:", response);
+      //agregar token que llega
+      Cookies.set("token", response.data.tokenSession, {
+        httpOnly: false,
+        secure: false,
+      });
       setUser(response.data);
       setIsAuthenticated(true);
     } catch (error) {

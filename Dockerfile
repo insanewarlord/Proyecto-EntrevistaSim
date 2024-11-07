@@ -1,28 +1,26 @@
-# Usar una imagen base de Node.js para construir el frontend
-FROM node:18 AS build
+# Imagen base de Node.js
+FROM node:18
 
-# Crear y establecer el directorio de trabajo en el contenedor
-WORKDIR /usr/src/app
+# Configurar directorio de trabajo
+WORKDIR /app
 
-# Copiar los archivos de package.json y package-lock.json (o yarn.lock)
-COPY package*.json ./
+# Copiar los archivos de package.json y package-lock.json
+COPY package.json package-lock.json ./
 
-# Instalar las dependencias
-RUN npm ci
+# Instalar dependencias
+RUN npm install
 
-# Copiar el resto del código de la aplicación
+# Copiar el resto de los archivos del proyecto
 COPY . .
 
 # Construir la aplicación
 RUN npm run build
 
-# Usar una imagen base de Nginx para servir el frontend
-FROM nginx:alpine
+# Instalar servidor HTTP para servir la aplicación
+RUN npm install -g serve
 
-# Copiar los archivos construidos al contenedor de Nginx
-COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+# Exponer el puerto 4000
+EXPOSE 4000
 
-# Exponer el puerto en el que se ejecuta Nginx (ejemplo: 80)
-EXPOSE 80
-
-CMD [ "nginx" , "-g" , "daemon off;" ]
+# Comando para iniciar la aplicación
+CMD ["serve", "-s", "dist", "-l", "4000"]

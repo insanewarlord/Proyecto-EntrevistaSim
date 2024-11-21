@@ -6,16 +6,16 @@ console.log("import.meta.env", import.meta.env.VITE_APP_BASE_URL_PROD);
 console.log("import.meta.env", import.meta.env.VITE_APP_BASE_URL_DEV);
 const instance = axios.create({
     baseURL: isProduction
-        ? import.meta.env.VITE_APP_BASE_URL_PROD
-        : import.meta.env.VITE_APP_BASE_URL_DEV,
+        ? (import.meta.env.VITE_APP_BASE_URL_PROD || "https://plataformainterviewsim-180808156072.us-central1.run.app/api")
+        : (import.meta.env.VITE_APP_BASE_URL_DEV || "http://localhost:4000/api"),
     withCredentials: true,
 });
 
 
 const instanceInterview = axios.create({
     baseURL: isProduction
-        ? import.meta.env.VITE_APP_INTERVIEW_BASE_URL_PROD
-        : import.meta.env.VITE_APP_INTERVIEW_BASE_URL_DEV,
+        ? (import.meta.env.VITE_APP_BASE_URL_PROD || "https://plataformainterviewsim-180808156072.us-central1.run.app/interview")
+        : (import.meta.env.VITE_APP_BASE_URL_DEV || "http://localhost:4000/interview"),
     withCredentials: true,
 });
 

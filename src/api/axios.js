@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: `${import.meta.env.VITE_SERVER_CONNECTION}/api`,
+    baseURL: `https://interviewsimbackend-180808156072.us-central1.run.app/api`,
     withCredentials: true,
 });
 
 const instanceInterview = axios.create({
-    baseURL: `${import.meta.env.VITE_SERVER_CONNECTION}/interview`,
+    baseURL: `https://interviewsimbackend-180808156072.us-central1.run.app/interview`,
     withCredentials: true,
 });
 

@@ -6,7 +6,7 @@ const instance = axios.create({
 });
 
 const instanceInterview = axios.create({
-    baseURL: `https://interviewsimbackend-180808156072.us-central1.run.app/interview`,
+    baseURL: `https://proyecto-interviewsim-backendgithub-180808156072.us-central1.run.app/interview`,
     withCredentials: true,
 });
 

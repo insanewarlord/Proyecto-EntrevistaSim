@@ -1,11 +1,8 @@
 import axios from "axios";
 
-
-//ajustar la url de acuerdo a la url de la api
 const instance = axios.create({
     baseURL: `https://interviewsimbackend-180808156072.us-central1.run.app/api`,
     withCredentials: true,
-
 });
 
 const instanceInterview = axios.create({

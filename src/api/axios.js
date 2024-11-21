@@ -1,30 +1,37 @@
 import axios from "axios";
 
+const isProduction = import.meta.env.VITE_ENV === "production";
+
 const instance = axios.create({
-    baseURL: `https://interviewsimbackend-180808156072.us-central1.run.app/api`,
+    baseURL: isProduction
+        ? import.meta.env.VITE_APP_BASE_URL_PROD
+        : import.meta.env.VITE_APP_BASE_URL_DEV,
     withCredentials: true,
 });
 
 const instanceInterview = axios.create({
-    baseURL: `https://proyecto-interviewsim-backendgithub-180808156072.us-central1.run.app/interview`,
+    baseURL: isProduction
+        ? import.meta.env.VITE_APP_INTERVIEW_BASE_URL_PROD
+        : import.meta.env.VITE_APP_INTERVIEW_BASE_URL_DEV,
     withCredentials: true,
 });
 
 // Interceptor para manejar errores
+const handleError = (error) => {
+    const status = error.response?.status || "Sin conexión";
+    const message = error.response?.data?.message || error.message || "Error desconocido";
+    console.error(`Error (${status}): ${message}`);
+    return Promise.reject(error);
+};
+
 instance.interceptors.response.use(
-    response => response,
-    error => {
-        console.error("Error en la solicitud:", error.response ? error.response.data : error.message);
-        return Promise.reject(error);
-    }
+    (response) => response,
+    handleError
 );
 
 instanceInterview.interceptors.response.use(
-    response => response,
-    error => {
-        console.error("Error en la solicitud:", error.response ? error.response.data : error.message);
-        return Promise.reject(error);
-    }
+    (response) => response,
+    handleError
 );
 
 export { instance, instanceInterview };

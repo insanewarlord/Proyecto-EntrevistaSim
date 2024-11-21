@@ -30,18 +30,18 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const checkLogin = async () => {
-      const cookies = Cookies.get();
-      if (!cookies.token) {
+      const token = Cookies.get("token");
+      if (!token) {
         setIsAuthenticated(false);
         setLoading(false);
         return;
       }
       try {
-        const res = await verifyTokenRequest(cookies.token);
+        const res = await verifyTokenRequest(token);
         if (!res.data) {
           setIsAuthenticated(false);
           setUser(null);
-          navigate("/login"); // Redirige al login si el token es inválido
+          navigate("/login");
         } else {
           setIsAuthenticated(true);
           setUser(res.data);
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(false);
         setLoading(false);
         console.error("Error al verificar el token:", error);
-        navigate("/login"); // Redirige al login si hay un error
+        navigate("/login");
       }
     };
     checkLogin();
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await LoginRequest(user);
       console.log("Response from LoginRequest:", response);
-      //agregar token que llega
+      // Guardar el token en las cookies
       Cookies.set("token", response.data.tokenSession, {
         httpOnly: false,
         secure: false,

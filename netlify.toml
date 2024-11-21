@@ -3,4 +3,4 @@
   publish = "dist/client"
 
 [context.production.environment]
-  NODE_VERSION = "16.x"
+  NODE_VERSION = "14.x"

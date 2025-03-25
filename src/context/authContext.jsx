@@ -26,25 +26,27 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [errorMesage, setErrorMesage] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const checkLogin = async () => {
-      const token = Cookies.get("token");
+      const token = localStorage.getItem("token");
+      console.log("Token:", token);
       if (!token) {
         setIsAuthenticated(false);
         setLoading(false);
         return;
       }
       try {
-        const res = await verifyTokenRequest(token);
-        if (!res.data) {
+        const response = await verifyTokenRequest();
+        if (response.data.error) {
           setIsAuthenticated(false);
           setUser(null);
           navigate("/login");
         } else {
           setIsAuthenticated(true);
-          setUser(res.data);
+          setUser(response.data);
         }
         setLoading(false);
       } catch (error) {
@@ -61,18 +63,22 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await LoginRequest(user);
       console.log("Response from LoginRequest:", response);
-      // Guardar el token en las cookies
-      Cookies.set("token", response.data.tokenSession, {
-        httpOnly: false,
-        secure: false,
-      });
+      if (response.data.error) {
+        setErrorMesage(response.data.message);
+        setIsAuthenticated(false);
+        return { error: true, message: response.data.message };
+      }
       setUser(response.data);
       setIsAuthenticated(true);
+      setErrorMesage(null);
+      localStorage.setItem("token", response.data.tokenSession);
+      return { error: false, message: "Inicio de sesión exitoso" };
     } catch (error) {
-      console.error(
-        "Error durante el inicio de sesión:",
-        error.response ? error.response.data : error.message
-      );
+      const errorMessage = error.response
+        ? error.response.data.message
+        : error.message;
+      setErrorMesage(errorMessage);
+      return { error: true, message: errorMessage };
     }
   };
 
@@ -135,6 +141,7 @@ export const AuthProvider = ({ children }) => {
         signup,
         signout,
         deleteUser,
+        errorMesage,
       }}
     >
       {children}

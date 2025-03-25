@@ -12,10 +12,11 @@ export default function LoginPage() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const { register, handleSubmit } = useForm();
   const [role, setRole] = useState(null);
-  const { signin, isAuthenticated } = useAuth();
+  const { signin, isAuthenticated, errorMesage } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("isAuthenticated:", isAuthenticated);
     if (isAuthenticated) {
       if (role === "student") {
         navigate("/student");
@@ -23,25 +24,23 @@ export default function LoginPage() {
         navigate("/teacher");
       }
     }
-  }, [isAuthenticated, navigate, role]);
+  }, [errorMesage, isAuthenticated, navigate, role]);
 
   const onSubmit = async (values) => {
     if (!role) {
       toast.warning("Por favor, selecciona tu rol.");
       return;
     }
-
-    try {
-      const data = { ...values, role };
-      console.log("Datos enviados:", data);
-      await signin(data);
-      console.log("Login exitoso");
-    } catch (error) {
-      toast.error(
-        "Error durante el inicio de sesión: " +
-          (error.response?.data?.message || error.message)
-      );
-      console.error("Error durante el inicio de sesión: ", error);
+    if (values.password.length < 6) {
+      toast.warning("La contraseña debe tener al menos 6 caracteres.");
+      return;
+    }
+    const response = await signin({ ...values, role });
+    console.log("response", response);
+    if (response.error === true) {
+      toast.error(response.message);
+    } else {
+      toast.success(response.message);
     }
   };
 

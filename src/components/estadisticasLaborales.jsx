@@ -19,21 +19,18 @@ function EstadisticasLaborales() {
       try {
         setLoading(true);
         const DatosInfo = await mostrarInfoRequest();
-        const respuesta = DatosInfo.data.info.data || [];
-        console.log("Datos obtenidos:", respuesta);
+        console.log("Respuesta completa de la API:", DatosInfo);
+
+        // Extraer los datos de la respuesta
+        const respuesta = DatosInfo.data || [];
+        console.log("Datos obtenidos del backend:", respuesta);
 
         // Formatear los datos obtenidos
-        const formattedData = respuesta.map((item) => {
-          // Verificar si totalInterviews es una cadena antes de eliminar las comas y convertirla a número
-          const totalInterviews =
-            typeof item.totalInterviews === "string"
-              ? Number(item.totalInterviews.replace(/,/g, ""))
-              : Number(item.totalInterviews);
-          return {
-            country: item.country,
-            totalInterviews: isNaN(totalInterviews) ? 0 : totalInterviews,
-          };
-        });
+        const formattedData = respuesta.data.map((item, index) => ({
+          id: `${item.country}-${index}`,
+          country: item.country || "Desconocido",
+          totalInterviews: item.totalInterviews || 0,
+        }));
 
         console.log("Datos formateados:", formattedData);
         setData(formattedData);
@@ -81,16 +78,26 @@ function EstadisticasLaborales() {
     );
   }
 
+  if (data.length === 0) {
+    return (
+      <div className="flex justify-center items-center w-full h-full">
+        <p className="text-gray-500 text-lg">
+          No hay datos disponibles para mostrar.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-center justify-center h-full w-full overflow-hidden rounded-lg">
       <div className="flex flex-col justify-center items-center h-full w-full">
         <h1 className="text-lg font-bold m-3 text-gray-400">
-          Estadísticas de entrevistas técnicas en el 2024
+          Estadísticas de entrevistas técnicas en el {new Date().getFullYear()}
         </h1>
         <div className="p-1 flex items-center justify-center h-full w-full m-5">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              data={data} // Utiliza los datos obtenidos de la API
+              data={data}
               margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
             >
               <CartesianGrid strokeDasharray="3 3" />

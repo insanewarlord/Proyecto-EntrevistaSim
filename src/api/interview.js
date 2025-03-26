@@ -8,5 +8,5 @@ export const getInterviewByTeacherRequest = async (id) => instanceInterview.get(
 export const deleteInterviewRequest = async (id) => instanceInterview.delete(`/deleteInterview/${id}`);
 export const calificarInterviewRequest = async (data) => instanceInterview.post(`/calificar`, data);
 export const obtenerRecomendacionesRequest = async (data) => instanceInterview.post(`/recomendaciones`, data);
-export const mostrarInfoRequest = async () => instanceInterview.get(`/info`);
+export const mostrarInfoRequest = async () => instanceInterview.get(`/Info`);
 export const CalificacionRecomendacionProgramacion = async (data)=> instanceInterview.post("/Programacion", data);

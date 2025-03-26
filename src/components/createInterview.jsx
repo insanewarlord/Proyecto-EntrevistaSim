@@ -40,7 +40,7 @@ function CreateInterview() {
       <div className="flex flex-col p-6 w-1/2 h-full bg-gradient-to-l from-purple-300 via-orange-300 to-rose-400 rounded-lg  overflow-hidden">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-5 items-center justify-center my-auto"
+          className="space-y-5 items-center justify-center my-auto overflow-y-auto"
         >
           <div className="flex flex-col space-y-8 p-6 bg-white  rounded-lg shadow-xl">
             <h1 className="flex items-center justify-center">
@@ -129,6 +129,9 @@ function CreateInterview() {
                   required: "La dificultad es requerida",
                 })}
               >
+                <option value="" className="text-gray-700 bg-white">
+                  Selecciona la dificultad
+                </option>
                 <option value="0" className="text-gray-700 bg-white">
                   0
                 </option>

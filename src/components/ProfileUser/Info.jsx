@@ -1,9 +1,29 @@
 import Protys from "prop-types";
+import { t } from "../../i18n";
+import { useTheme } from "../../context/themeContext";
 
 function Info({ name, email, indetifiquer, date, role }) {
+  const { language } = useTheme();
   console.log("info usuario", name, email, indetifiquer, date, role);
+  // Formateo de fecha según idioma
+  let formattedDate = date;
+  if (date) {
+    try {
+      const d = new Date(date);
+      formattedDate = d.toLocaleString(language === 'en' ? 'en-US' : 'es-ES', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+    } catch (e) {
+      formattedDate = date;
+    }
+  }
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center bg-gradient-to-r from-red-300 via-yellow-300 to-orange-300 overflow-hidden rounded-lg">
+    <div className="h-full w-full flex flex-col items-center justify-center bg-gradient-to-r from-[#283e56] to-[#4fc3f7] border-2 border-yellow-400 overflow-hidden rounded-lg">
       <div className="flex flex-col w-full max-w-xl p-6 ">
         <div className="flex flex-col space-y-4">
           <div className="flex bg-white p-2 rounded-lg w-full justify-between items-center">
@@ -24,7 +44,7 @@ function Info({ name, email, indetifiquer, date, role }) {
               </svg>
 
               <div className="text-lg font-semibold text-gray-900">
-                Identificador:
+                {t('identificador', language)}
               </div>
             </div>
             <div className="text-md text-gray-700">{indetifiquer}</div>
@@ -48,7 +68,7 @@ function Info({ name, email, indetifiquer, date, role }) {
 
               <div className="text-lg font-semibold text-gray-900">Rol:</div>
             </div>
-            <div className="text-md text-gray-700">{role}</div>
+            <div className="text-md text-gray-700">{t(role, language)}</div>
           </div>
           <div className="flex bg-white p-2 rounded-lg w-full justify-between items-center">
             <div className="flex items-center space-x-2">
@@ -66,7 +86,7 @@ function Info({ name, email, indetifiquer, date, role }) {
                   d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
                 />
               </svg>
-              <div className="text-lg font-semibold text-gray-900">Nombre:</div>
+              <div className="text-lg font-semibold text-gray-900">{t('name', language)}</div>
             </div>
             <div className="text-md text-gray-700">{name}</div>
           </div>
@@ -108,16 +128,16 @@ function Info({ name, email, indetifiquer, date, role }) {
               </svg>
 
               <div className="text-lg font-semibold text-gray-900">
-                Fecha de creacion:
+                {t('creation_date', language)}
               </div>
             </div>
-            <div className="text-md text-gray-700">{date}</div>
+            <div className="text-md text-gray-700">{formattedDate}</div>
           </div>
         </div>
       </div>
       <div className="flex items-center justify-center mt-6 ">
         <p className="text-sm text-gray-600">
-          Esta es la información de tu perfil de usuario en InterviewSim.
+          {t('profile_info_text', language)}
         </p>
       </div>
     </div>

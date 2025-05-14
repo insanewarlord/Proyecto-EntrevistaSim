@@ -28,12 +28,12 @@ function Buttons() {
   };
   return (
     <>
-      <div className="h-full w-full flex items-center bg-gradient-to-r from-red-300 via-yellow-300 to-emerald-300 overflow-hidden rounded-lg">
+      <div className="h-full w-full flex items-center bg-gradient-to-r from-[#283e56] to-[#4fc3f7] border-2 border-yellow-400 overflow-hidden rounded-lg">
         <div className="flex w-full justify-between items-center">
           <div className="flex  px-8">
             <button
               onClick={handleDeleteUser}
-              className="bg-gradient-to-t from-purple-500 to-purple-400 border-2 border-white text-white font-bold py-2 px-3 rounded-lg flex items-center"
+              className="bg-gradient-to-t from-[#283e56] to-[#4fc3f7] border-2 border-yellow-400 text-white font-bold py-2 px-3 rounded-lg flex items-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ function Buttons() {
             </button>
           </div>
           <div className="flex space-x-8 px-8">
-            <button className="bg-gradient-to-t from-blue-500 to-blue-400 border-2 border-white text-white font-bold py-2 px-3 rounded-lg flex items-center">
+            <button className="bg-gradient-to-t from-[#355c7d] to-[#6dd5fa] border-2 border-yellow-400 text-white font-bold py-2 px-3 rounded-lg flex items-center" onClick={() => navigate('/edit-profile')}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -72,7 +72,7 @@ function Buttons() {
             </button>
 
             <Link to="/edit-profile" onClick={handleSignOut}>
-              <button className="bg-gradient-to-t from-red-500 to-red-400 border-2 border-white text-white font-bold py-2 px-3 rounded-lg flex items-center ">
+              <button className="bg-gradient-to-t from-[#1e3c72] to-[#2a5298] border-2 border-yellow-400 text-white font-bold py-2 px-3 rounded-lg flex items-center ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

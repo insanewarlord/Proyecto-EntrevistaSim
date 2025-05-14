@@ -1,10 +1,14 @@
 import { useAuth } from "../../context/authContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getGradesRequest, getGradesTeacherRequest } from "../../api/auth";
+import { useTheme } from "../../context/themeContext";
+import { t } from "../../i18n";
 
 function Acciones() {
   const { user } = useAuth();
   const [acciones, setAcciones] = useState([]);
+  const { language } = useTheme();
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     const traerAcciones = async () => {
@@ -46,8 +50,20 @@ function Acciones() {
     }
   }, [user]);
 
+  // Funciones para deslizar
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -350, behavior: 'smooth' });
+    }
+  };
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 350, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="h-full w-full p-5 bg-gradient-to-r from-orange-300 via-lime-300 to-emerald-300 rounded-lg overflow-hidden">
+    <div className="h-full w-full p-5 bg-gradient-to-r from-[#283e56] to-[#4fc3f7] border-2 border-yellow-400 rounded-lg overflow-hidden">
       <div className="flex flex-col w-full h-full p-5 space-y-5 overflow-y-auto">
         {acciones.length === 0 ? (
           <div className="flex items-center justify-center h-full">
@@ -65,6 +81,11 @@ function Acciones() {
             </div>
           ))
         )}
+      </div>
+      <div className="flex items-center justify-center mt-6 ">
+        <p className="text-sm text-gray-600">
+          {t('profile_info_text', language)}
+        </p>
       </div>
     </div>
   );

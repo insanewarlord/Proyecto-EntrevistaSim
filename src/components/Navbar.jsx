@@ -3,11 +3,14 @@ import Logo from "../assets/Logo.png";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useTheme } from "../context/themeContext";
+import { t } from "../i18n";
 
 function Navbar() {
   const { user, signout } = useAuth();
   console.log("datos del usuario", user);
   const navigate = useNavigate();
+  const { language } = useTheme();
 
   const handleSignOut = async () => {
     try {
@@ -39,7 +42,7 @@ function Navbar() {
 
   return (
     <>
-      <header className="flex items-center justify-center top-0 bg-gradient-to-l from-rose-300 via-purple-300 to-lime-300 shadow-md h-20 w-full md:px-6 rounded-lg">
+      <header className="flex items-center justify-center top-0 bg-gradient-to-r from-[#283e56] to-[#4fc3f7] shadow-md h-20 w-full md:px-6 rounded-lg border-b-4 border-[#ffd700]">
         <nav className="flex justify-between items-center w-full  px-6 mx-auto">
           <div className="p-1 flex items-center justify-center cursor-pointer">
             <img
@@ -57,7 +60,7 @@ function Navbar() {
                 <>
                   <div className="flex items-center justify-center">
                     <p className="text-xl font-bold text-gray-900 mr-5 hidden lg:block md:text-base">
-                      ¡Bienvenido de nuevo a tu inicio Estudiante 👋❤️!
+                      {t('welcome_student', language)}
                     </p>
 
                     <MenuButton
@@ -104,7 +107,7 @@ function Navbar() {
                             active && "bg-white hover:text-white  font-bold"
                           }`}
                         >
-                          Profile
+                          {t('profile', language)}
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -128,9 +131,9 @@ function Navbar() {
                           className={`h-10 flex items-center justify-between px-2 text-sm rounded-md${
                             active && "bg-white hover:text-white font-bold"
                           }`}
-                          href="/"
+                          to={"/settings"}
                         >
-                          Settings
+                          {t('settings', language)}
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -161,7 +164,7 @@ function Navbar() {
                           }`}
                           onClick={handleSignOut}
                         >
-                          Sign-off
+                          {t('signoff', language)}
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"

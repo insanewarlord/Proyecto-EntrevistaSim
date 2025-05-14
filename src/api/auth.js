@@ -1,4 +1,3 @@
-
 import {instance} from './axios.js';
 
 // Registro
@@ -23,3 +22,8 @@ export const getGradesRequest = () => instance.get(`/getGrades`);
 
 //traer calificaciones de profesor
 export const getGradesTeacherRequest = () => instance.get(`/getGradesTeacher`);
+
+// Actualizar perfil de usuario
+export const updateProfileRequest = (formData) => instance.put(`/updateProfile`, formData, {
+  headers: { 'Content-Type': 'multipart/form-data' }
+});

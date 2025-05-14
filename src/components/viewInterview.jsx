@@ -5,10 +5,12 @@ import {
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 function ViewInterview() {
   const { user } = useAuth();
   const [interviews, setInterviews] = useState([]);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const fetchInterviews = async () => {
@@ -47,7 +49,7 @@ function ViewInterview() {
         },
       });
       setInterviews(response.data);
-      toast.success("Entrevista eliminada con éxito");
+      toast.success(t('interview_deleted_success', i18n.language));
     } catch (error) {
       console.error("Error deleting interview:", error);
     }
@@ -55,8 +57,13 @@ function ViewInterview() {
 
   return (
     <>
-      <div className="flex h-full w-full overflow-hidden rounded-lg bg-gradient-to-r from-rose-400 via-orange-200 to-purple-300">
+      <div className="w-full h-full bg-gradient-to-r from-[#283e56] to-[#4fc3f7] rounded-xl overflow-y-auto p-4 scrollbar-yellow-viewinterview">
         <div className="flex flex-col w-full h-full p-5 space-y-5 overflow-y-auto">
+          {interviews.length === 0 && (
+            <div className="text-center text-gray-500 py-8 text-lg font-semibold">
+              Entrevistados no encontrado
+            </div>
+          )}
           {interviews.map((interview) => (
             <div
               key={interview.id}

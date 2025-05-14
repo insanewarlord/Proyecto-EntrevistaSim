@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import Cookies from "js-cookie";
 import {
@@ -8,7 +8,6 @@ import {
   logoutRequest,
   deleteUserRequest,
 } from "../api/auth.js";
-import { useContext } from "react";
 
 export const AuthContext = createContext();
 
@@ -17,7 +16,6 @@ export const useAuth = () => {
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
-  console.log("AuthContext value:", context);
   return context;
 };
 
@@ -27,26 +25,42 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [errorMesage, setErrorMesage] = useState(null);
 
+  // Limpieza de sesión y localStorage
+  const cleanSession = () => {
+    setUser(null);
+    setIsAuthenticated(false);
+    setErrorMesage(null);
+    localStorage.removeItem("token");
+    Cookies.remove("token");
+  };
+
+  useEffect(() => {
+    // Borra el token cada vez que se monta el contexto (recarga)
+    localStorage.removeItem("token");
+    Cookies.remove("token");
+    setUser(null);
+    setIsAuthenticated(false);
+  }, []);
+
   useEffect(() => {
     const checkLogin = async () => {
       setLoading(true);
       const token = localStorage.getItem("token");
       if (!token) {
-        setIsAuthenticated(false);
+        cleanSession();
         setLoading(false);
         return;
       }
       try {
         const response = await verifyTokenRequest();
         if (response.data.error) {
-          setIsAuthenticated(false);
-          setUser(null);
+          cleanSession();
         } else {
           setIsAuthenticated(true);
           setUser(response.data);
         }
       } catch (error) {
-        setIsAuthenticated(false);
+        cleanSession();
         console.error(error);
       } finally {
         setLoading(false);
@@ -55,10 +69,10 @@ export const AuthProvider = ({ children }) => {
     checkLogin();
   }, []);
 
-  const signin = async (user) => {
+  const signin = async (userData) => {
     try {
-      const response = await LoginRequest(user);
-      console.log("Response from LoginRequest:", response);
+      setLoading(true);
+      const response = await LoginRequest(userData);
       if (response.data.error) {
         setErrorMesage(response.data.message);
         setIsAuthenticated(false);
@@ -75,55 +89,45 @@ export const AuthProvider = ({ children }) => {
         : error.message;
       setErrorMesage(errorMessage);
       return { error: true, message: errorMessage };
+    } finally {
+      setLoading(false);
     }
   };
 
-  const signup = async (user) => {
+  const signup = async (userData) => {
     try {
-      const response = await registerRequest(user);
-      console.log("Response from registerRequest:", response);
+      setLoading(true);
+      const response = await registerRequest(userData);
       setUser(response.data);
       setIsAuthenticated(true);
+      setErrorMesage(null);
+      localStorage.setItem("token", response.data.tokenSession);
     } catch (error) {
-      console.error(
-        "Error durante el registro:",
+      setErrorMesage(
         error.response ? error.response.data : error.message
       );
+      throw error;
+    } finally {
+      setLoading(false);
     }
   };
 
   const signout = async () => {
     try {
       await logoutRequest();
-      Cookies.remove("token");
-      setUser(null);
-      setIsAuthenticated(false);
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        console.error("Error 401: No autorizado. No se pudo cerrar sesión.");
-      } else {
-        console.error(
-          "Error durante el cierre de sesión:",
-          error.response ? error.response.data : error.message
-        );
-      }
+      // No importa si falla, igual limpiamos la sesión
+    } finally {
+      cleanSession();
     }
   };
 
-  const deleteUser = async (user) => {
+  const deleteUser = async (userData) => {
     try {
-      await deleteUserRequest(user);
-      setUser(null);
-      setIsAuthenticated(false);
+      await deleteUserRequest(userData);
+      cleanSession();
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        console.error("Error 401: No autorizado. No se pudo cerrar sesión.");
-      } else {
-        console.error(
-          "Error durante la eliminación del usuario:",
-          error.response ? error.response.data : error.message
-        );
-      }
+      cleanSession();
     }
   };
 

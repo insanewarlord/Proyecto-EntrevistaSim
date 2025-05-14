@@ -9,10 +9,13 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { mostrarInfoRequest } from "../api/interview";
+import { useTheme } from "../context/themeContext";
+import { t } from "../i18n";
 
 function EstadisticasLaborales() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { language } = useTheme();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -92,7 +95,7 @@ function EstadisticasLaborales() {
     <div className="flex items-center justify-center h-full w-full overflow-hidden rounded-lg">
       <div className="flex flex-col justify-center items-center h-full w-full">
         <h1 className="text-lg font-bold m-3 text-gray-400">
-          Estadísticas de entrevistas técnicas en el {new Date().getFullYear()}
+          {t('laboral_stats_title', language).replace('{{year}}', new Date().getFullYear())}
         </h1>
         <div className="p-1 flex items-center justify-center h-full w-full m-5">
           <ResponsiveContainer width="100%" height="100%">

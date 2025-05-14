@@ -63,21 +63,21 @@ function PanelInterviews() {
   }
 
   return (
-    <div className="flex h-full w-full bg-gradient-to-r from-lime-300 via-red-100 to-purple-200 rounded-lg  overflow-hidden">
+    <div className="flex h-full w-full bg-gradient-to-r from-[#283e56] to-[#4fc3f7] rounded-lg overflow-hidden">
       <div
-        className="flex flex-col w-full h-full p-5 space-y-5 overflow-y-auto"
+        className="flex flex-col w-full h-full p-5 space-y-5 overflow-y-auto panel-interviews-scroll"
         key={interviews.title}
       >
         {interviews.map((interview) => (
           <div
             key={interview.id}
-            className="flex flex-col bg-white rounded-lg p-5 space-y-5 mb-5"
+            className="flex flex-col bg-white rounded-lg p-5 space-y-5 mb-5 text-black"
           >
             <h2 className="text-lg font-bold">{interview.title}</h2>
             <p>{interview.description}</p>
             <div className="space-y-2">
-              <p className="text-gray-500">Empresa: {interview.empresa}</p>
-              <p className="text-gray-500">
+              <p className="text-gray-700">Empresa: {interview.empresa}</p>
+              <p className="text-gray-700">
                 Tipo de entrevista: {interview.tipoEntrevista}
               </p>
             </div>
@@ -90,7 +90,7 @@ function PanelInterviews() {
                 Hacer entrevista
               </Link>
               <div className="flex space-x-1 items-center justify-center">
-                <span className="text-gray-500">Dificultad:</span>
+                <span className="text-gray-700">Dificultad:</span>
                 <p className="m-1"> {interview.Dificultad}</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

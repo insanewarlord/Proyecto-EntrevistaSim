@@ -120,7 +120,8 @@ function Profile() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#283e56] via-[#4fc3f7] to-[#ffd700] p-4 dark:bg-gray-900 text-gray-900 dark:text-gray-200">
+    <div className="h-screen w-full p-5 overflow-auto bg-[#cde5ff] dark:bg-gray-900">
+
       <div className="flex flex-col items-start h-full">
         <div className="w-full flex justify-between items-center rounded-lg space-x-6 mx-auto">
           <button

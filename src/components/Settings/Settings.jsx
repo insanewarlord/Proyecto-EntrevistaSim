@@ -20,7 +20,7 @@ function Settings() {
   };
 
   return (
-    <div className="h-screen w-full p-5 overflow-auto bg-gradient-to-br from-[#283e56] via-[#4fc3f7] to-[#ffd700] dark:bg-gray-900">
+    <div className="h-screen w-full p-5 overflow-auto bg-[#cde5ff] dark:bg-gray-900">
       <div className="mt-12 flex flex-col items-center h-full w-full">
         {/* Botón de regreso */}
         <div className="w-full flex justify-start mb-4">

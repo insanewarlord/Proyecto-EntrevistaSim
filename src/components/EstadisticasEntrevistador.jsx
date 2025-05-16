@@ -73,7 +73,7 @@ function EstadisticasEntrevistador() {
             />
             <Tooltip 
               contentStyle={{ 
-                backgroundColor: theme === 'dark' ? '#1F2937' : '#fff',
+                backgroundColor: theme === 'dark' ? '#1F2937' : '#CCE2FF',
                 border: 'none',
                 borderRadius: '8px',
                 color: theme === 'dark' ? '#fff' : '#000'

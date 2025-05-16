@@ -96,7 +96,7 @@ export default function EditProfilePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#283e56] via-[#4fc3f7] to-[#ffd700] p-4 dark:bg-gray-900">
+    <div className="h-screen w-full p-5 overflow-auto bg-[#cde5ff] dark:bg-gray-900">
       <button
         onClick={() => navigate(-1)}
         className="absolute top-8 left-8 z-50 rounded-full p-4 bg-gradient-to-r from-[#4fc3f7] via-[#ffd700] to-[#283e56] shadow-md hover:scale-110 transform duration-200 ease-in-out"

@@ -12,9 +12,9 @@ export default function Spinner() {
         >
           <defs>
             <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#ff0000" /> {/* Rojo */}
-              <stop offset="50%" stopColor="#8a2be2" /> {/* Morado */}
-              <stop offset="100%" stopColor="#ffd700" /> {/* Amarillo */}
+              <stop offset="0%" stopColor="#0f52ba" /> {/* Azul metalizado  */}
+              <stop offset="50%" stopColor="#87ceeb" /> {/*Azul celeste */}
+              <stop offset="100%" stopColor="#ffd700" /> {/* Dorado */}
             </linearGradient>
           </defs>
           <circle

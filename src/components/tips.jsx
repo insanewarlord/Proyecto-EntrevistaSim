@@ -52,10 +52,8 @@ function Tips() {
     setCurrentIndex(currentIndex === slides.length - 1 ? 0 : currentIndex + 1);
   };
 
-  console.log(Consejo1, Consejo2, Consejo3, Consejo4, Consejo5, Consejo6);
-
   return (
-    <div className="flex text-center bg-gradient-to-r from-[#283e56] to-[#4fc3f7] border-2 border-yellow-400 rounded-lg w-full justify-between shadow-md px-10 mx-auto items-center">
+    <div className="flex items-center justify-center  h-full w-full overflow-hidden rounded-lg">
       <div className="flex justify-center items-center h-full w-full">
         <div className="flex w-full h-full">
           <div
@@ -72,7 +70,7 @@ function Tips() {
                 >
                   <img
                     src={slide.src}
-                    className="w-full max-h-56 object-contain"
+                    className="w-full h-full  object-center"
                     alt={slide.alt}
                   />
                 </div>

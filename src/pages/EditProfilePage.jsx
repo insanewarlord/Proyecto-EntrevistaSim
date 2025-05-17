@@ -95,33 +95,35 @@ export default function EditProfilePage() {
     }
   };
 
-  return (
-    <div className="h-screen w-full p-5 overflow-auto bg-[#cde5ff] dark:bg-gray-900">
+return (
+  <div className="h-screen w-full p-5 overflow-auto bg-[#cde5ff] dark:bg-gray-900">
+    <div className="mt-12 flex flex-col items-center h-full w-full">
+
+      {/* Botón de regresar */}
       <button
         onClick={() => navigate(-1)}
         className="absolute top-8 left-8 z-50 rounded-full p-4 bg-gradient-to-r from-[#4fc3f7] via-[#ffd700] to-[#283e56] shadow-md hover:scale-110 transform duration-200 ease-in-out"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={2}
-          stroke="currentColor"
-          className="size-5"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-          />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="size-5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
         </svg>
       </button>
-      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-lg flex flex-col items-center border-2 border-[#ffd700] dark:bg-gray-900" style={{boxShadow: '0 8px 32px 0 rgba(40,62,86,0.15)'}}>
+
+      {/* Contenedor principal */}
+      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-lg flex flex-col items-center border-2 border-[#ffd700] dark:bg-gray-900" style={{ boxShadow: '0 8px 32px 0 rgba(40,62,86,0.15)' }}>
+
+        {/* Encabezado con logo */}
         <div className="flex flex-col items-center mb-6">
           <img src={Logo} alt="Logo" className="w-20 h-20 mb-2 border-2 border-[#ffd700] bg-white rounded-full shadow-md" />
-          <h2 className="text-2xl font-bold mb-2 text-black dark:text-white" style={{textShadow: '0 2px 8px #ffd70055'}}>{t('edit_profile', language)}</h2>
+          <h2 className="text-2xl font-bold mb-2 text-black dark:text-white" style={{ textShadow: '0 2px 8px #ffd70055' }}>
+            {t('edit_profile', language)}
+          </h2>
         </div>
+
+        {/* Formulario de perfil */}
         <form onSubmit={handleSaveChanges} className="w-full flex flex-col items-center">
+
+          {/* Foto de perfil */}
           <div className="mb-6 flex flex-col items-center w-full">
             <img
               src={previewPhoto}
@@ -142,6 +144,8 @@ export default function EditProfilePage() {
               />
             </label>
           </div>
+
+          {/* Campo de nombre */}
           <div className="mb-4 w-full">
             <label className="block mb-1 text-sm font-medium text-[#283e56]">{t('change_name', language)}</label>
             <input
@@ -152,6 +156,8 @@ export default function EditProfilePage() {
               required
             />
           </div>
+
+          {/* Campo de email */}
           <div className="mb-4 w-full">
             <label className="block mb-1 text-sm font-medium text-[#283e56]">{t('email', language)}</label>
             <input
@@ -161,6 +167,8 @@ export default function EditProfilePage() {
               className="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500 cursor-not-allowed border-[#ffd700]"
             />
           </div>
+
+          {/* Campo de rol */}
           <div className="mb-4 w-full">
             <label className="block mb-1 text-sm font-medium text-[#283e56]">{t('role', language)}</label>
             <input
@@ -170,6 +178,8 @@ export default function EditProfilePage() {
               className="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500 cursor-not-allowed border-[#ffd700]"
             />
           </div>
+
+          {/* Botones de acción */}
           <div className="flex justify-end w-full space-x-2 mt-8">
             <button
               type="button"
@@ -188,6 +198,8 @@ export default function EditProfilePage() {
             </button>
           </div>
         </form>
+
+        {/* Formulario de cambio de contraseña */}
         <form onSubmit={handleChangePassword} className="w-full flex flex-col items-center mt-8 border-t pt-6">
           <h3 className="text-lg font-bold mb-4 text-[#283e56] flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 mr-2">
@@ -195,6 +207,7 @@ export default function EditProfilePage() {
             </svg>
             {t('change_password', language)}
           </h3>
+
           <div className="mb-4 w-full">
             <label className="block mb-1 text-sm font-medium text-[#283e56]">{t('password', language)}</label>
             <input
@@ -205,6 +218,7 @@ export default function EditProfilePage() {
               placeholder={t('password', language)}
             />
           </div>
+
           <div className="mb-4 w-full">
             <label className="block mb-1 text-sm font-medium text-[#283e56]">{t('confirm_password', language)}</label>
             <input
@@ -215,6 +229,7 @@ export default function EditProfilePage() {
               placeholder={t('confirm_password', language)}
             />
           </div>
+
           <div className="flex justify-end w-full space-x-2 mt-2">
             <button
               type="submit"
@@ -225,7 +240,9 @@ export default function EditProfilePage() {
             </button>
           </div>
         </form>
+
       </div>
     </div>
-  );
-} 
+  </div>
+);
+}
